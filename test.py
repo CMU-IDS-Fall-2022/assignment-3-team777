@@ -1,7 +1,6 @@
 import pyreadr
 import pandas as pd
 
-result = pyreadr.read_r('storms.rda')
-# df = pd.DataFrame.from_dict(result, orient='index')
+result = pyreadr.read_r('storms.rda')['storms']
 
 print(result)
