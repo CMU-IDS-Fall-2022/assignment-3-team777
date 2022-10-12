@@ -37,38 +37,34 @@ st.write("Hmm 🤔, is there some correlation between body mass and flipper leng
 # st.write(chart)
 
 
-
-
+"""
+Data process: Group the dataframe by storm names, 
+and calculate the duration of each storm, getting rid of the ones too long.
+"""
 storm_duration = pd.DataFrame(columns=['duration', 'wind', 'pressure', 'status'])
-
 dfs = []
 
 for name, group in main_df.groupby('name'):        
     
     temp_df = group[['wind', 'pressure', 'status']]
-    
     temp = pd.to_datetime(group[['year','month', 'day', 'hour']])
     dura = pd.to_timedelta(temp - temp.iloc[0]).astype('timedelta64[h]')
 
     if dura.max() > 1000:
         continue
-
     temp_df['duration'] = dura
         
     dfs.append(temp_df)
 
 storm_duration = pd.concat(dfs)
-storm_duration
 
-
-
-import altair as alt
-
+"""
+Visualization of interactive exploration chart, analysing relationship 
+among duration, the type of storms, pressure, and max wind speed.
+"""
 
 scale = alt.Scale(domain=storm_duration['status'].value_counts().keys().to_list())
 color = alt.Color('status:N', scale=scale, title='Storm Category')
-
-
 brush = alt.selection_interval(encodings=['x'])
 click = alt.selection_multi(encodings=['color'])
 
@@ -115,4 +111,4 @@ st.write(chart1)
 
 
 
-st.markdown("This project was created by Student1 and Student2 for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
+st.markdown("This project was created by Zhi Jing and Yifei Wei for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
