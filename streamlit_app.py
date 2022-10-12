@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+import pyreadr
+
+
 st.title("Let's analyze some Penguin Data 🐧📊.")
 
 @st.cache  # add caching so we load the data only once
@@ -10,22 +13,104 @@ def load_data():
     penguins_url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/v0.1.0/inst/extdata/penguins.csv"
     return pd.read_csv(penguins_url)
 
-df = load_data()
+# df = load_data()
+
+main_df = pyreadr.read_r('storms.rda')['storms']
+main_df.rename(columns={'long':'lon'}, inplace=True)
+
+st.map(main_df)
 
 st.write("Let's look at raw data in the Pandas Data Frame.")
 
-st.write(df)
+st.write(main_df)
 
 st.write("Hmm 🤔, is there some correlation between body mass and flipper length? Let's make a scatterplot with [Altair](https://altair-viz.github.io/) to find.")
 
-chart = alt.Chart(df).mark_point().encode(
-    x=alt.X("body_mass_g", scale=alt.Scale(zero=False)),
-    y=alt.Y("flipper_length_mm", scale=alt.Scale(zero=False)),
-    color=alt.Y("species")
-).properties(
-    width=600, height=400
-).interactive()
+# chart = alt.Chart(df).mark_point().encode(
+#     x=alt.X("body_mass_g", scale=alt.Scale(zero=False)),
+#     y=alt.Y("flipper_length_mm", scale=alt.Scale(zero=False)),
+#     color=alt.Y("species")
+# ).properties(
+#     width=600, height=400
+# ).interactive()
 
-st.write(chart)
+# st.write(chart)
+
+
+
+
+storm_duration = pd.DataFrame(columns=['duration', 'wind', 'pressure', 'status'])
+
+dfs = []
+
+for name, group in main_df.groupby('name'):        
+    
+    temp_df = group[['wind', 'pressure', 'status']]
+    
+    temp = pd.to_datetime(group[['year','month', 'day', 'hour']])
+    dura = pd.to_timedelta(temp - temp.iloc[0]).astype('timedelta64[h]')
+
+    if dura.max() > 1000:
+        continue
+
+    temp_df['duration'] = dura
+        
+    dfs.append(temp_df)
+
+storm_duration = pd.concat(dfs)
+storm_duration
+
+
+
+import altair as alt
+
+
+scale = alt.Scale(domain=storm_duration['status'].value_counts().keys().to_list())
+color = alt.Color('status:N', scale=scale)
+
+
+brush = alt.selection_interval(encodings=['x'])
+click = alt.selection_multi(encodings=['color'])
+
+points = alt.Chart().mark_point().encode(
+    alt.X('duration:Q', title='Hours'),
+    alt.Y('pressure:Q',
+        title='maximum sustained wind speed',
+        scale=alt.Scale(domain=[880, 1025])
+    ),
+    color=alt.condition(brush, color, alt.value('lightgray')),
+#     color = color,
+    size=alt.Size('wind:Q', scale=alt.Scale(range=[0, 50]))
+).properties(
+    width=550,
+    height=300
+).add_selection(
+    brush
+).transform_filter(
+    click
+)
+
+bars = alt.Chart().mark_bar().encode(
+    x='count()',
+    y='status:N',
+    color=alt.condition(click, color, alt.value('lightgray')),
+).transform_filter(
+    brush
+).properties(
+    width=550,
+).add_selection(
+    click
+)
+
+chart1 = alt.vconcat(
+    points,
+    bars,
+    data=storm_duration,
+    title="Storm"
+)
+
+st.write(chart1)
+
+
 
 st.markdown("This project was created by Student1 and Student2 for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
