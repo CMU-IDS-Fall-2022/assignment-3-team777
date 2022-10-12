@@ -66,7 +66,7 @@ import altair as alt
 
 
 scale = alt.Scale(domain=storm_duration['status'].value_counts().keys().to_list())
-color = alt.Color('status:N', scale=scale)
+color = alt.Color('status:N', scale=scale, title='Storm Category')
 
 
 brush = alt.selection_interval(encodings=['x'])
@@ -75,12 +75,12 @@ click = alt.selection_multi(encodings=['color'])
 points = alt.Chart().mark_point().encode(
     alt.X('duration:Q', title='Hours'),
     alt.Y('pressure:Q',
-        title='maximum sustained wind speed',
+        title='Air Pressure at the Storm\'s Center',
         scale=alt.Scale(domain=[880, 1025])
     ),
     color=alt.condition(brush, color, alt.value('lightgray')),
 #     color = color,
-    size=alt.Size('wind:Q', scale=alt.Scale(range=[0, 50]))
+    size=alt.Size('wind:Q', scale=alt.Scale(range=[0, 50]), title="Maximum Sustained Wind Speed")
 ).properties(
     width=550,
     height=300
@@ -91,8 +91,10 @@ points = alt.Chart().mark_point().encode(
 )
 
 bars = alt.Chart().mark_bar().encode(
-    x='count()',
-    y='status:N',
+    alt.X('count()', title='Number of Each Category'),
+    alt.Y('status:N',
+        title='Storm Category'
+    ),
     color=alt.condition(click, color, alt.value('lightgray')),
 ).transform_filter(
     brush
