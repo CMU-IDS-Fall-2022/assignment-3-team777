@@ -62,9 +62,13 @@ names = st.multiselect('Name', main_df['name'].unique())
 chosen_name_df = main_df[main_df['name'].isin(names)]
 st.map(chosen_name_df)
 
-st.write('By Year:')
+st.write('By Time:')
 years = st.multiselect('Year', main_df['year'].unique())
-chosen_year_df = main_df[main_df['year'].isin(years)]
+months = st.multiselect('Month', main_df['month'].unique(), default=main_df['month'].unique())
+if years is not None:
+    chosen_year_df = main_df[main_df['year'].isin(years)]
+if months is not None:
+    chosen_year_df = chosen_year_df[chosen_year_df['month'].isin(months)]
 st.map(chosen_year_df)
 
 
