@@ -28,6 +28,31 @@ st.write("Let's first look at raw data in the Pandas Data Frame.")
 st.write(main_df)
 
 
+if "visibility" not in st.session_state:
+    st.session_state.visibility = "visible"
+    st.session_state.disabled = False
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.checkbox("Disable selectbox widget", key="disabled")
+    st.radio(
+        "Set selectbox label visibility 👉",
+        key="visibility",
+        options=["visible", "hidden", "collapsed"],
+    )
+
+with col2:
+    option = st.selectbox(
+        "How would you like to be contacted?",
+        ("Email", "Home phone", "Mobile phone"),
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+    )
+
+
+
+
 st.map(main_df)
 
 st.write('Let\'s choose a few storms to visualize.')
@@ -90,7 +115,7 @@ brush = alt.selection_interval(encodings=['x'])
 click = alt.selection_multi(encodings=['color'])
 
 points = alt.Chart().mark_point().encode(
-    alt.X('duration:Q', title='Hours'),
+    alt.X('duration:Q', title='Duration (h)'),
     alt.Y('pressure:Q',
         title='Air Pressure at the Storm\'s Center',
         scale=alt.Scale(domain=[880, 1025])
@@ -129,6 +154,51 @@ chart1 = alt.vconcat(
 )
 
 st.write(chart1)
+
+
+drop_df = main_df.dropna(subset=['tropicalstorm_force_diameter'])
+
+drop_df = drop_df.loc[~(drop_df['tropicalstorm_force_diameter']==0)]
+
+source = drop_df[:4987]
+
+pts = alt.selection(type="single", encodings=['x'])
+
+rect = alt.Chart(source).mark_rect().encode(
+    alt.X('wind:Q', bin=True),
+    alt.Y('pressure:Q', bin=True),
+    alt.Color('count()',
+        scale=alt.Scale(scheme='greenblue'),
+        legend=alt.Legend(title='Total Records')
+    )
+)
+
+circ = rect.mark_point().encode(
+    alt.ColorValue('grey'),
+    alt.Size('max(tropicalstorm_force_diameter)',
+        legend=alt.Legend(title='Max Force Diameter')
+    )
+).transform_filter(
+    pts
+)
+
+bar = alt.Chart(source).mark_bar().encode(
+    x='status:N',
+    y='count()',
+    color=alt.condition(pts, alt.ColorValue("steelblue"), alt.ColorValue("grey"))
+).properties(
+    width=550,
+    height=200
+).add_selection(pts)
+
+chart2=alt.vconcat(
+    rect + circ,
+    bar
+).resolve_legend(
+    color="independent",
+    size="independent"
+)
+st.write(chart2)
 
 
 
