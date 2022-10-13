@@ -7,7 +7,7 @@ import numpy as np
 import pyreadr
 
 
-st.title("Assignment 3 for IDS （Team777) -- Storm tracks data analysis 🌪🌪🌪")
+st.title("Assignment 3 for IDS (Team777) -- Storm tracks data analysis 🌪🌪🌪")
 
 
 
