@@ -36,7 +36,7 @@ st.write("The data source is from [dplyr's storm tracks data](https://dplyr.tidy
 st.markdown("- name: Storm Name \n - year,month,day: Date of report \n - hour: Hour of report (in UTC) \n - lat,long: Location of storm center \n - status: Storm classification (Tropical Depression, Tropical Storm, or Hurricane) \n - category: Saffir-Simpson storm category (estimated from wind speed. -1 = Tropical Depression, 0 = Tropical Storm)\n - wind: storm's maximum sustained wind speed (in knots)\n  - pressure:Air pressure at the storm\'s center (in millibars)\n - tropicalstorm_force_diameter: Diameter (in nautical miles) of the area experiencing tropical storm strength winds (34 knots or above)\n - hurricane_force_diameter: Diameter (in nautical miles) of the area experiencing hurricane strength winds (64 knots or above)\n There are something missing in the raw data. So we will process the data according to our proposed question before visualization.")
 
 
-st.subheader("Then, let's look at the statistics of this dataset:")
+st.subheader("Then, let's look at the statistics of this dataset 👉📊:")
 
 
 
@@ -116,7 +116,7 @@ Graph 1:\n
 """
 
 
-st.markdown("**Interactive hint**: \nYou can select an area of interest in the above scatter plot, the corresponding data statistics will be updated simultanueously in the bar plot below. You can also click the bars in the bar plot to check the statistics of a particualr storm type.")
+st.markdown("**Interactive hint**: \nYou can select an area of interest in the above scatter plot, the corresponding data statistics will be updated simultanueously in the bar plot below. You can also click the bars in the bar plot to check the statistics of a particualr storm type. Also, you can select an area in the above chart and drag it to check a particular range of data. Isn't that cool🙌🙌🙌!!")
 
 
 
@@ -175,7 +175,7 @@ Graph 2:\n
 - Purpose: Visualization of the relation between the frequency of wind speed and pressure and the diameter of tropical storms, and we add a function of selecting the tpye of storms to provide special perspectives.
 """
 
-st.markdown("**Interactive hint**: \n You can click the bars in the bar plot to check the statistics of a particualr storm type.")
+st.markdown("**Interactive hint**: \n You can click the bars in the bar plot to check the statistics of a particualr storm type. Give a try!👆👆")
 
 
 # chart3=alt.Chart(main_df[2000:7000]).mark_boxplot(extent='min-max').encode(
