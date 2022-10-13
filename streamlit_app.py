@@ -20,8 +20,15 @@ main_df.rename(columns={'long':'lon'}, inplace=True)
 
 st.map(main_df)
 
-st.write("Let's look at raw data in the Pandas Data Frame.")
+st.write('Let\'s choose a few storms to visualize.')
 
+names = st.multiselect('Name', main_df['name'].unique())
+chosen_df = main_df[main_df['name'].isin(names)]
+st.map(chosen_df)
+
+st.write("Let's look at raw data in the Pandas Data Frame.")
+main_df['year'] = main_df['year'].astype('int64')
+main_df['month'] = main_df['month'].astype('int64')
 st.write(main_df)
 
 st.write("Hmm 🤔, is there some correlation between body mass and flipper length? Let's make a scatterplot with [Altair](https://altair-viz.github.io/) to find.")
