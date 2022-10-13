@@ -8,7 +8,6 @@ import pyreadr
 st.title("Assignment 3 for IDS (Team777) -- Storm tracks data analysis 🌪🌪🌪")
 
 
-
 @st.cache  # add caching so we load the data only once
 def load_data():
     # Load the penguin data from https://github.com/allisonhorst/palmerpenguins.
@@ -203,7 +202,7 @@ chosen_name_df = main_df[main_df['name'].isin(names)]
 st.map(chosen_name_df)
 
 if len(names) == 0:
-    st.write("Please choose the year and month you wish to see")
+    st.write("Please choose the name of the storm you wish to see")
 
 st.write('Selected by Year and Month:')
 
@@ -257,4 +256,4 @@ References:
 
 
 
-st.markdown("This project was created by Zhi Jing and Yifei Wei for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
+st.markdown("This project was created by Zhi Jing (zjing2) and Yifei Wei () for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")

@@ -1,7 +1,9 @@
 # Project name
 
 ### Screenshot
-![A screenshot of your application. Could be a GIF.](screenshot.png)
+![Screenshot](screenshot_title.png)
+![Example 1:](gif_graph.png)
+![Example 2:](gif_map.png)
 
 TODO: Update screenshot
 
