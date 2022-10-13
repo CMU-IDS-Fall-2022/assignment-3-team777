@@ -1,5 +1,3 @@
-from calendar import month
-from tkinter import N
 import streamlit as st
 import pandas as pd
 import altair as alt
