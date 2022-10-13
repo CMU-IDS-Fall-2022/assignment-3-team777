@@ -15,10 +15,18 @@ def load_data():
 
 # df = load_data()
 
+
+
 main_df = pyreadr.read_r('storms.rda')['storms']
 main_df.rename(columns={'long':'lon'}, inplace=True)
+main_df.dropna(subset=['wind','pressure', 'status'], inplace=True)
 main_df['year'] = main_df['year'].astype('int64')
 main_df['month'] = main_df['month'].astype('int64')
+
+st.write("Let's first look at raw data in the Pandas Data Frame.")
+
+st.write(main_df)
+
 
 st.map(main_df)
 
@@ -34,9 +42,7 @@ years = st.multiselect('Year', main_df['year'].unique())
 chosen_year_df = main_df[main_df['year'].isin(years)]
 st.map(chosen_year_df)
 
-st.write("Let's look at raw data in the Pandas Data Frame.")
 
-st.write(main_df)
 
 st.write("Hmm 🤔, is there some correlation between body mass and flipper length? Let's make a scatterplot with [Altair](https://altair-viz.github.io/) to find.")
 
@@ -60,14 +66,15 @@ dfs = []
 
 for name, group in main_df.groupby('name'):        
     
-    temp_df = group[['wind', 'pressure', 'status']]
+    temp_df = pd.DataFrame(group[['wind', 'pressure', 'status']])
     temp = pd.to_datetime(group[['year','month', 'day', 'hour']])
     dura = pd.to_timedelta(temp - temp.iloc[0]).astype('timedelta64[h]')
 
     if dura.max() > 1000:
         continue
-    temp_df['duration'] = dura
-        
+    
+    temp_df.loc[:, 'duration'] = dura
+
     dfs.append(temp_df)
 
 storm_duration = pd.concat(dfs)
