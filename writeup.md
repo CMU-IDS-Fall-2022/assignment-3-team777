@@ -2,8 +2,8 @@
 
 ### Screenshot
 ![Screenshot](screenshot_title.png)
-![Example 1:](gif_graph.png)
-![Example 2:](gif_map.png)
+![Example 1:](gif_graph.gif)
+![Example 2:](gif_map.gif)
 
 TODO: Update screenshot
 
