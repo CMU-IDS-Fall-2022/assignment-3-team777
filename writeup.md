@@ -5,11 +5,6 @@
 ![Example 1:](gif_graph.gif)
 ![Example 2:](gif_map.gif)
 
-TODO: Update screenshot
-
-
-
-TODO: Short abstract describing the main goals and how you achieved them.
 
 ### Abstract
 The data source is Storm Tracks. Our main goal is to exhibit the tracks of certain storms and their statistical relationship among the features of data. We achieve this by preprocessing the data and drawing interactive scatter plot, bar plot, heatmap, and the world map.
@@ -17,36 +12,30 @@ The data source is Storm Tracks. Our main goal is to exhibit the tracks of certa
 
 ## Project Goals
 
-TODO: **A clear description of the goals of your project.** 
 Questions we want users to answer: What are the tracks of and patterns of the storms? What is the relationship among wind speed, pressure, date, storm type, duration of storms, and storm diameters?
 
 
 ## Design
 
-TODO: **A rationale for your design decisions.** 
-We choose interactive scatter plot, bar plot, heatmap, and world map. We also have considered the static graphs, streamgraphs, horizon graph, so on and so forth. The reasons we for our final choices are that interactiveness is necessary, and according to our data, the time is not strictly continuous so we cannot apply certain type of graphs.
+We choose interactive scatter plot, bar plot, heatmap, and world map. We also have considered the static graphs, streamgraphs, horizon graph, etc.. The reasons for our final choices are that interactiveness is necessary, and according to our data, the time is not strictly continuous so we cannot apply certain type of graphs that require continuity.
 
 
 ## Development
 
-TODO: **An overview of your development process.** 
 Zhi Jing is responsible for the scatter plots, bar plots, heatmaps, and the layout of the webpage. Yifei Wei is responsible for the world map visualization. We both contribute to the improvement of the final version of our assignment.
 
 
 - Zhi Jing:
-I spend about 16 hours in total for discussion, picking dataset, topic/graph design, coding, webpage layout arrangement. The coding took the most of time, about 8 hours, essentially because I have to try a lot of graph to see the effect and choose whether to use or not.
+He spent about 16 hours in total for discussion, picking dataset, topic/graph design, coding, webpage layout arrangement. The coding took the most of time, about 8 hours, essentially because I have to try a lot of graph to see the effect and choose whether to use or not.
 
 - Yifei Wei:
-TODO
-
-Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
+He spent about 15 hours in total for discussion, picking dataset, data preprocessing, coding. Regarding coding he tried a few methods to find a way to draw a world map.
 
 ## Success Story
 
-TODO:  **A success story of your project.** 
+Finding: With duration increasing, the majority of corresponding storms are tropical depression, tropical storm, hurricane, extratropical, and other low, respectively. 
+
+This finding was discovered from fixing the duration range to 100h and slided on graph1 from left to right.
 We successfully deliever the exhibition of storm tracks and their statistics.
 
-
-
-Describe an insight or discovery you gain with your application that relates to the goals of your project.
 
