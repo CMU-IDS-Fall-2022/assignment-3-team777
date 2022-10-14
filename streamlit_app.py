@@ -257,4 +257,4 @@ References:
 
 
 
-st.markdown("This project was created by Zhi Jing (zjing2) and Yifei Wei () for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
+st.markdown("This project was created by Zhi Jing (zjing2) and Yifei Wei (yifeiwei) for the [Interactive Data Science](https://dig.cmu.edu/ids2022) course at [Carnegie Mellon University](https://www.cmu.edu).")
