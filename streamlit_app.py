@@ -22,6 +22,7 @@ main_df.rename(columns={'long':'lon'}, inplace=True)
 main_df.dropna(subset=['wind','pressure', 'status'], inplace=True)
 main_df['year'] = main_df['year'].astype('int64')
 main_df['month'] = main_df['month'].astype('int64')
+main_df['hour'] = main_df['hour'].astype('int64')
 
 st.subheader("Let's first take a look at raw data in the Pandas Data Frame.")
 

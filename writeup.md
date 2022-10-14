@@ -26,7 +26,7 @@ Zhi Jing is responsible for the scatter plots, bar plots, heatmaps, and the layo
 
 
 - Zhi Jing:
-He spent about 16 hours in total for discussion, picking dataset, topic/graph design, coding, webpage layout arrangement. The coding took the most of time, about 8 hours, essentially because I have to try a lot of graph to see the effect and choose whether to use or not.
+He spent about 16 hours in total for discussion, picking dataset, topic/graph design, coding, webpage layout arrangement. The coding took the most of time, about 8 hours, essentially because he has to try a lot of graph to see the effect and choose whether to use or not.
 
 - Yifei Wei:
 He spent about 15 hours in total for discussion, picking dataset, data preprocessing, coding. Regarding coding he tried a few methods to find a way to draw a world map.
